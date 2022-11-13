@@ -1,4 +1,4 @@
 cmake_minimum_required(VERSION 3.0)
-project(Viper CXX)
+project(viper CXX)
 
-add_executable(Viper src/main.cpp)
+add_executable(viper src/main.cpp)
