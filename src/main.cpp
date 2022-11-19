@@ -7,14 +7,7 @@
 
 using namespace std;
 
-
-void report(int line, string where, string message) {
-    cout << "[line " << line << "] Error" << "where" << ": " << message << endl;
-}
-
-void error(int line, string message) {
-    report(line, "", message);
-}
+ 
 
 class Viper {
 public:
@@ -57,8 +50,6 @@ private:
     string file_name;
     string script;
 };
-
-
 
 
 int main(int argc, char *argv[]) {
