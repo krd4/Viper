@@ -1,15 +1,43 @@
+#include <stdexcept>
 #include <iostream>
+#include <fstream>
 #include <string>
+#include <regex>
+#include <format>
 
 using namespace std;
 
-int run(string file_name) {
-    cout << file_name << endl;
-    return 0;
+ifstream openScript(string file_name) {
+    if (!regex_match(file_name, regex("([a-z]|[A-Z]|\\/)*\\.vr"))) {
+        throw invalid_argument(file_name + " is not viper script");
+    }
+
+    ifstream f;
+    f.open(file_name);
+    
+    return f;
 }
 
-int run_prompt() {
-    return 0;
+void run(string file_name) {
+    string script;
+    try {
+        auto f = openScript(file_name);
+        
+        if (f.is_open()) {
+            while(getline(f, script)) {
+                cout << script << endl;
+            }
+
+            f.close();
+        }
+    }
+
+    catch(invalid_argument& e) {
+        cout << e.what() << endl;
+    }
+}
+
+void run_prompt() {
 }
 
 int main(int argc, char *argv[]) {
@@ -22,4 +50,6 @@ int main(int argc, char *argv[]) {
     }
 
     run_prompt();
+
+    return 0;
 }
